@@ -15,4 +15,4 @@ Route::get('/', "Frontend\DefaultController@index");
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/dashboard', 'Backend\DashboardController@index');

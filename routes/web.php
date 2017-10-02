@@ -16,3 +16,5 @@ Route::get('/', "Frontend\DefaultController@index");
 Auth::routes();
 
 Route::get('/dashboard', 'Backend\DashboardController@index');
+
+Route::resource('/dashboard/projects', 'Backend\ProjectsController');

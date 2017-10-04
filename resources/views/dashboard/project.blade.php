@@ -2,7 +2,11 @@
 
 @section('content')
 <h1 class="page-header">Projects</h1>
-
+<div class="row">
+    <div class="col-md-12">
+        <a href="{{ url('/dashboard/projects/create') }}" class="btn btn-success">ADD PROJECT</a>
+    </div>
+</div>
 <div class="row">
     <div class="col-md-12">
         <div class="table-responsive">

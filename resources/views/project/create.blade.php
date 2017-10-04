@@ -5,11 +5,11 @@
         <form method="post" action="{{ url('/dashboard/projects') }}">
             <div class="form-group">
                 <label for="inputName">Name</label>
-                <input type="text" class="form-control" id="inputName" placeholder="Name">
+                <input type="text" name="name" class="form-control" id="inputName" placeholder="Name">
             </div>
             <div class="form-group">
                 <label for="inputCategory">Category</label>
-                <select class="form-control" id="inputCategory">
+                <select class="form-control" id="inputCategory" name="category">
                     <option value="web">web</option>
                     <option value="android">android</option>
                     <option value="descktop">descktop</option>
@@ -18,11 +18,11 @@
             </div>
             <div class="form-group">
                 <label for="inputPreview">Preview</label>
-                <input type="file" class="form-control" id="inputPreview" placeholder="Prview">
+                <input type="file" class="form-control" id="inputPreview" placeholder="Prview" name="preview">
             </div>
             <div class="form-group">
                 <label for="inputClient">Client</label>
-                <input type="text" class="form-control" id="inputClient" placeholder="Client">
+                <input type="text" class="form-control" id="inputClient" placeholder="Client" name="client">
             </div>
             <div class="form-group">
                 <label for="inputDescription">Description</label>

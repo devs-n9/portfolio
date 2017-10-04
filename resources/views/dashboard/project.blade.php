@@ -29,7 +29,7 @@
                         <td>{{ $project->category }}</td>
                         <td>{{ $project->date }}</td>
                         <td>
-                            <a href="/dashbord/projects/edit">
+                            <a href="/dashboard/projects/{{ $project->id }}/edit">
                                 <i class="glyphicon glyphicon-pencil"></i>
                             </a>
                         </td>

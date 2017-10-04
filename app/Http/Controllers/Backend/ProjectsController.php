@@ -68,7 +68,10 @@ class ProjectsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $project = Project::find($id);
+        return view('project.edit', [
+            'project' => $project
+        ]);
     }
 
     /**
@@ -80,7 +83,12 @@ class ProjectsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        
+        $project = Project::find($id);
+        $project->update($data);
+        
+        return redirect('/dashboard/projects');
     }
 
     /**

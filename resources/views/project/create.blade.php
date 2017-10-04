@@ -28,6 +28,9 @@
                 <label for="inputDescription">Description</label>
                 <textarea name="description" id="inputDescription" cols="30" rows="10" class="form-control"></textarea>
             </div>
+            
+            {{ csrf_field() }}
+            
             <button type="submit" class="btn btn-info">CREATE</button>
         </form>
     </div>

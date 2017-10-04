@@ -41,7 +41,12 @@ class ProjectsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        
+        Project::create($data);
+        
+        return redirect('/dashboard/projects');
+        
     }
 
     /**

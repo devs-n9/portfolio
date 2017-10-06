@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Project;
+use App;
 
 class ProjectsController extends Controller
 {
@@ -29,7 +30,6 @@ class ProjectsController extends Controller
      */
     public function create()
     {
-        
         return view('project.create');
     }
 
@@ -40,8 +40,14 @@ class ProjectsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   
         $data = $request->all();
+         
+        $this->validate($request, [
+            'name' => 'required|max:60',
+            'client' => 'required|max:60',
+            'description' => 'required'
+        ]);
         
         Project::create($data);
         

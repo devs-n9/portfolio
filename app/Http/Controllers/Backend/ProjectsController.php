@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Project;
 use App;
+use File;
 
 class ProjectsController extends Controller
 {
@@ -42,12 +43,20 @@ class ProjectsController extends Controller
     public function store(Request $request)
     {   
         $data = $request->all();
-         
         $this->validate($request, [
             'name' => 'required|max:60',
             'client' => 'required|max:60',
-            'description' => 'required'
+            'description' => 'required',
+            'preview' => 'required|mimes:jpeg,png|max:15000'
         ]);
+        
+        $file = $request->file('preview');
+        $path = public_path('img/portfolio');
+        $filename = $file->hashName();
+        
+        $file->move($path, $filename);
+        
+        $data['preview'] = $filename;
         
         Project::create($data);
         
@@ -90,8 +99,37 @@ class ProjectsController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->all();
+		
+        $this->validate($request, [
+            'name' => 'required|max:60',
+            'client' => 'required|max:60',
+            'description' => 'required'
+        ]);
         
-        $project = Project::find($id);
+        $file = $request->file('preview');
+		
+		$project = Project::find($id);
+		
+		if(!empty($file)){
+			$this->validate($request, [
+				'preview' => 'required|mimes:jpeg,png|max:15000'
+			]);
+			
+			$path = public_path('img/portfolio/');
+			$filename = $file->hashName();
+			
+			$oldfile = $path . $project->preview;
+		
+			if(File::isFile($oldfile)){
+				File::delete($oldfile);
+			}
+			
+			$file->move($path, $filename);
+
+			$data['preview'] = $filename;
+		}
+		
+        
         $project->update($data);
         
         return redirect('/dashboard/projects');
@@ -105,7 +143,16 @@ class ProjectsController extends Controller
      */
     public function destroy($id)
     {
+		$path = public_path('img/portfolio/');
+		
         $project = Project::find($id);
+		
+		$file = $path . $project->preview;
+		
+		if(File::isFile($file)){
+			File::delete($file);
+		}
+		
         $project->delete();
         
         return redirect('/dashboard/projects');

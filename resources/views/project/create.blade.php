@@ -2,7 +2,7 @@
 @section('content')
 <div class="row">
     <div class="col-md-6">
-        <form method="post" action="{{ url( '/dashboard/projects') }}">
+        <form method="post" action="{{ url( '/dashboard/projects') }}" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="inputName">Name</label>
                 <input type="text" name="name" class="form-control" id="inputName" placeholder="Name" value="{{ old('name') }}">
@@ -26,6 +26,13 @@
             <div class="form-group">
                 <label for="inputPreview">Preview</label>
                 <input type="file" class="form-control" id="inputPreview" placeholder="Prview" name="preview">
+                @if ($errors->has('preview'))
+                <span class="help-block">
+                    <strong class="text-danger">
+                    {{ $errors->first('preview') }}
+                    </strong>
+                </span>
+                @endif
             </div>
             <div class="form-group">
                 <label for="inputClient">Client</label>

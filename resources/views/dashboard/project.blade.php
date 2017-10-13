@@ -26,7 +26,7 @@
                     <tr>
                         <td>{{ $project->id }}</td>
                         <td>{{ $project->name }}</td>
-                        <td>{{ $project->category }}</td>
+                        <td>{{ $project->category->category }}</td>
                         <td>{{ $project->date }}</td>
                         <td>
                             <a href="/dashboard/projects/{{ $project->id }}/edit">

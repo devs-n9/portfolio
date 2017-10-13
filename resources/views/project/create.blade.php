@@ -16,11 +16,12 @@
             </div>
             <div class="form-group">
                 <label for="inputCategory">Category</label>
-                <select class="form-control" id="inputCategory" name="category">
-                    <option value="web">web</option>
-                    <option value="android">android</option>
-                    <option value="descktop">descktop</option>
-                    <option value="ios">ios</option>
+                <select class="form-control" id="inputCategory" name="category_id">
+                    @foreach($categories as $category)
+                    <option value="{{ $category->id }}">
+                        {{ $category->category }}
+                    </option>
+                    @endforeach
                 </select>
             </div>
             <div class="form-group">

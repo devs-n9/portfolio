@@ -8,7 +8,7 @@ use DB;
 class Project extends Model
 {
     public $timestamps = false;
-    protected $fillable = ['name', 'category', 'preview', 'client', 'description'];
+    protected $fillable = ['name', 'category_id', 'preview', 'client', 'description'];
 	
 	public function category()
 	{

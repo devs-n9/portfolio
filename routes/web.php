@@ -14,7 +14,7 @@ use App\Models\Project;
 */
 
 Route::get('/', "Frontend\DefaultController@index");
-
+Route::get('/category/{category}', 'Frontend\DefaultController@category');
 Auth::routes();
 
 Route::get('/dashboard', 'Backend\DashboardController@index');

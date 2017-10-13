@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Project;
+use App\Models\Category;
 use App;
 use File;
 
@@ -31,7 +32,11 @@ class ProjectsController extends Controller
      */
     public function create()
     {
-        return view('project.create');
+        $categories = Category::all();
+
+        return view('project.create', [
+            'categories' => $categories
+        ]);
     }
 
     /**
@@ -83,9 +88,11 @@ class ProjectsController extends Controller
      */
     public function edit($id)
     {
+        $categories = Category::all();
         $project = Project::find($id);
         return view('project.edit', [
-            'project' => $project
+            'project' => $project,
+            'categories' => $categories
         ]);
     }
 

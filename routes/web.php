@@ -21,6 +21,8 @@ Route::get('/dashboard', 'Backend\DashboardController@index');
 
 Route::resource('/dashboard/projects', 'Backend\ProjectsController');
 
+Route::post('/email', 'Frontend\DefaultController@email');
+
 Route::get('/test', function () {
 	$projects = Project::all();
 	$categories = Category::all();

@@ -13,11 +13,17 @@ try {
     require('bootstrap-sass');
 } catch (e) {}
 
+
+require('popper.js')(jQuery);
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
  * to our Laravel back-end. This library automatically handles sending the
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
+
+require('jquery.easing')(jQuery);
+require('./jvalidation.js')(jQuery);
+require('./agency.js')(jQuery);
 
 window.axios = require('axios');
 

@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Project;
 use App\Models\Category;
+use Mail;
+use App\User;
+use App\Mail\ContactMail;
 
 class DefaultController extends Controller
 {
@@ -28,5 +31,14 @@ class DefaultController extends Controller
             'categories' => $categories,
             'projectlist' => $category->projects
         ]);
+    }
+
+    public function email(Request $request)
+    {
+        $data = $request->all();
+        $user = User::find(1);
+        Mail::to($user)
+            ->send(new ContactMail($data));
+
     }
 }

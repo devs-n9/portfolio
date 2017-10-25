@@ -8,6 +8,7 @@ use App\Models\Project;
 use App\Models\Category;
 use App;
 use File;
+use Image;
 
 class ProjectsController extends Controller
 {
@@ -56,11 +57,18 @@ class ProjectsController extends Controller
         ]);
         
         $file = $request->file('preview');
-        $path = public_path('img/portfolio');
+        $path = public_path('img/portfolio/');
         $filename = $file->hashName();
         
-        $file->move($path, $filename);
-        
+        $file->move($path, $filename);        
+
+        $img = Image::make($path . $filename)
+            ->resize(300, null, function ($constraint) {
+            $constraint->aspectRatio();
+        });
+
+        $img->save($path . 'preview_' . $filename, 20);
+
         $data['preview'] = $filename;
         
         Project::create($data);
@@ -126,12 +134,21 @@ class ProjectsController extends Controller
 			$filename = $file->hashName();
 			
 			$oldfile = $path . $project->preview;
+            $oldfilePreview = $path . 'preview_' . $project->preview;
 		
 			if(File::isFile($oldfile)){
 				File::delete($oldfile);
+                File::delete($oldfilePreview);
 			}
 			
 			$file->move($path, $filename);
+            dd($img = Image::make($path . $filename)->exif());
+            $img = Image::make($path . $filename)
+                ->resize(300, null, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+
+            $img->save($path . 'preview_' . $filename, 80);
 
 			$data['preview'] = $filename;
 		}

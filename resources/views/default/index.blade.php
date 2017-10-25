@@ -48,7 +48,7 @@
                   <i class="fa fa-plus fa-3x"></i>
                 </div>
               </div>
-              <img class="img-fluid" src="/img/portfolio/{{ $project->preview }}" alt="">
+              <img class="img-fluid" src="/img/portfolio/preview_{{ $project->preview }}" alt="">
             </a>
             <div class="portfolio-caption">
               <h4>{{ $project->name }}</h4>

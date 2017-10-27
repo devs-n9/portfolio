@@ -12,6 +12,7 @@ use Image;
 
 class ProjectsController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *

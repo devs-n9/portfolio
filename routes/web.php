@@ -2,6 +2,7 @@
 
 use App\Models\Category;
 use App\Models\Project;
+use Auth;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,13 +14,19 @@ use App\Models\Project;
 |
 */
 
+Route::group(['middleware' => ['admin']], function () {
+    Route::get('/dashboard', 'Backend\DashboardController@index');
+
+	Route::resource('/dashboard/projects', 'Backend\ProjectsController');
+
+	Route::get('/dashboard/logout', function () {
+		Auth::logout();
+	});
+});
+
 Route::get('/', "Frontend\DefaultController@index");
 Route::get('/category/{category}', 'Frontend\DefaultController@category');
 Auth::routes();
-
-Route::get('/dashboard', 'Backend\DashboardController@index');
-
-Route::resource('/dashboard/projects', 'Backend\ProjectsController');
 
 Route::post('/email', 'Frontend\DefaultController@email');
 
